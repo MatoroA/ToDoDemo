@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isPresented: Bool = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack(alignment: .bottomTrailing){
+            TasksView()
+            
+            SmallAddButton()
+                .onTapGesture {
+                    isPresented.toggle()
+                }
         }
+        .sheet(isPresented: $isPresented, content: {
+            AddTaskView()
+        })
         .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(hue: 0.086, saturation: 0.141, brightness: 0.972))
     }
 }
 
