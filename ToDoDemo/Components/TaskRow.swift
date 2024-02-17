@@ -10,6 +10,7 @@ import SwiftUI
 struct TaskRow: View {
     var task: String
     var isCompleted: Bool
+    var onTap: ()-> Void
     
     var body: some View {
         HStack(spacing: 20){
@@ -17,9 +18,14 @@ struct TaskRow: View {
             Text(task)
                 .font(.title2)
         }
+        .onTapGesture {
+            onTap()
+        }
     }
 }
 
 #Preview {
-    TaskRow(task: "Task one test", isCompleted: false)
+    TaskRow(task: "Task one test", isCompleted: false) {
+        print("Task item on clicked")
+    }
 }

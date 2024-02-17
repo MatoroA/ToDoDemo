@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var realmManager = RealmManager()
     @State private var isPresented: Bool = false
     
     var body: some View {
         ZStack(alignment: .bottomTrailing){
             TasksView()
+                .environmentObject(realmManager)
             
             SmallAddButton()
                 .onTapGesture {
@@ -21,6 +23,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $isPresented, content: {
             AddTaskView()
+                .environmentObject(realmManager)
         })
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
